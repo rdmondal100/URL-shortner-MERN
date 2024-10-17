@@ -1,0 +1,61 @@
+{
+  "name": "URL Shooortner",
+  "short_name": "Shooortner",
+  "description": "A powerful URL shortener tool that creates short links, tracks clicks, and offers analytics. Shorten long URLs effortlessly and monitor their performance with ease.",
+  "theme_color": "#020817",
+  "background_color": "#020817",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "permissions": {
+    "clipboard-write": {
+      "description": "Allows copying short URLs to the clipboard."
+    }
+  },
+  "categories": ["utilities", "productivity", "tools"],
+  "keywords": [
+    "URL shortener",
+    "link shortener",
+    "URL tracker",
+    "short links",
+    "analytics",
+    "click tracking",
+    "Shooortner"
+  ],
+  "author": "Riday Mondal",
+  "lang": "en",
+  "related_applications": [],
+  "url_structure": {
+    "input": "/url",
+    "short": "/:shortId",
+    "analytics": "/analytics/{shortId}"
+  },
+  "features": [
+    "Generate short URLs instantly",
+    "Track click analytics in real time",
+    "Copy short URLs to clipboard",
+    "View detailed analytics for each link (clicks, timestamps, referrer sites, etc.)"
+  ],
+  "social": {
+    "twitter": "https://x.com/rdmondal100",
+    "facebook": "https://www.facebook.com/rdmondal100/",
+    "github": "https://github.com/rdmondal100"
+  },
+  "open_graph": {
+    "title": "URL Shooortner - Your Ultimate Link Management Tool",
+    "description": "Shorten URLs, track click analytics, and gain insights. Use URL Shooortner to streamline your links and manage them effectively.",
+    "image": "https://url-shooortner.vercel.app/favicon-512x512",
+    "url": "https://url-shooortner.vercel.app"
+  }
+}
