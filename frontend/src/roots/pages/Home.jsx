@@ -11,7 +11,7 @@ const Home = () => {
 		<section className='home min-h-[80vh] bg-no-repeat w-full flex flex-col justify-center  px-5 ' 
   
     >
-			<div  className=' theme toggle hidden md:block absolute  top-[55%] -right-24'>
+			<div  className=' theme toggle hidden lg:block absolute  top-[55%] -right-24'>
 				<ToggleTheme />
 			</div>
 
