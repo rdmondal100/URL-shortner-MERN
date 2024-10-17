@@ -9,8 +9,10 @@ const initialState = {
   urlDetails: [],
   currentShortUrl: '',
   currentTheme: 'dark',
-  isLoading: 'false',
+  isLoading: false,
   errorMessage: '',
+  isSubmitting: false,
+
 
 }
 
@@ -57,20 +59,30 @@ const urlSlice = createSlice({
     clearErrorMessage: (state) => {
       state.errorMessage = ""
     },
+    setErrorMessage: (state,action) => {
+      state.errorMessage =action.payload
+    },
+    setSubmitting: (state,action) => {
+      console.log(action.payload)
+      state.isSubmitting = action.payload
+    },
   },
 
   extraReducers: (builder) => {
     builder
       .addCase(createShortUrl.pending, (state) => {
         state.isLoading = true
+        state.isSubmitting = true
       })
       .addCase(createShortUrl.fulfilled, (state, action) => {
         state.isLoading = false
+        state.isSubmitting = false
         state.urlDetails.unshift(action.payload)
         state.currentShortUrl = action.payload
       })
       .addCase(createShortUrl.rejected, (state, action) => {
         state.isLoading = false
+        state.isSubmitting = false
         state.errorMessage = action.payload
       })
 
@@ -95,6 +107,6 @@ const urlSlice = createSlice({
   }
 })
 
-export const { changeTheme, setIsLoading, clearErrorMessage } = urlSlice.actions
+export const { changeTheme, setIsLoading, clearErrorMessage, setSubmitting, setErrorMessage } = urlSlice.actions
 
 export default urlSlice.reducer

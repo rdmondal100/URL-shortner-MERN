@@ -3,10 +3,13 @@ import { copyIcon } from "../assets";
 import { useState } from "react";
 import { baseDomain } from "./constants/baseDomain";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import Loader from "./Loader";
+import ErrorPopUp from "./ErrorPopUp";
 
 const ShowDetails = () => {
-	const { currentShortUrl } = useSelector((state) => state.urlData);
-
+	const { currentShortUrl,isSubmitting,errorMessage } = useSelector((state) => state.urlData);
+console.log(errorMessage)
+console.log(isSubmitting)
 	const [copid, setCopied] = useState(false);
 	const handleCopyBtn = async (url) => {
 		try {
@@ -23,7 +26,12 @@ const ShowDetails = () => {
 
 	return (
 		<>
-			{currentShortUrl._id && (
+		<div className="container">
+			{!isSubmitting && errorMessage && <ErrorPopUp/>}
+		{
+			isSubmitting && !currentShortUrl?._id && <Loader/>
+		}
+			{currentShortUrl?._id && (
 				<div className=' w-[90vw] justify-center items-center flex  relative'>
 					<div className=' h-12 w-[80%] max-w-[500px] px-5 py-3 lg:h-[3.3rem] bg-accent  rounded-full flex justify-start items-center  relative '>
 						<a
@@ -70,6 +78,8 @@ const ShowDetails = () => {
 					</div>
 				</div>
 			)}
+		</div>
+
 		</>
 	);
 };

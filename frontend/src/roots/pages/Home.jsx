@@ -16,20 +16,14 @@ const Home = () => {
 			</div>
 
 
-      {/* <div className='registerBottom fixed bottom-0 gradient-bottomRegister w-full h-16 backdrop-blur-sm flex justify-center items-center '
-			>
-				<p className='text-center flex gap-1 w-full justify-center items-center text-sm text-muted-foreground'>
-					<span className='text-primary'>Register New </span> to enjoy
-					Unlimited History
-				</p>
-			</div> */}
+    
 
 			<div className='inputDetails w-full flex justify-center items-center flex-col '>
 				<div className='details mt-14 flex flex-col gap-6 '>
-					<h1 className='title gradient-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center font-extrabold'>
+					<h1 className='title gradient-title text-4xl  lg:text-5xl xl:text-6xl text-center font-extrabold'>
 						Shorten Your Loooong Links :)
 					</h1>
-					<p className=' text-center text-sm text-muted-foreground md:text-[1rem] xl:text-lg'>
+					<p className=' text-center text-base text-muted-foreground xl:text-lg'>
 						URL Shortner is an efficient and easy-to-use URL shortening
 						service that streamlines your online experience.
 					</p>
