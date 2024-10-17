@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config({path:'.env'})
 
 import express from 'express'
 import urlRouter from "./routes/url.route.js"
@@ -6,15 +8,19 @@ import cors from 'cors';
 
 const app = express()
 
+const PORT = process.env.PORT || 5000
 
-const PORT = 8001
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || "http://localhost:5173/",
+  credentials: true
+}))
+
 app.use("/", urlRouter)
 
-connectToMongooDB("mongodb+srv://chittomondal100:75hzpETZOzdwfYz6@url.ylfmr.mongodb.net/?retryWrites=true&w=majority&appName=url")
-  .then(() => {
 
+connectToMongooDB(process.env.MONGODB_URL)
+  .then(() => {
 
 
     app.listen(PORT, () => {
