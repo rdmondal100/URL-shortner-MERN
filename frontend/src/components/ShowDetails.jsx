@@ -23,7 +23,7 @@ const ShowDetails = () => {
 
 	return (
 		<>
-			{!currentShortUrl._id && (
+			{currentShortUrl._id && (
 				<div className=' w-[90vw] justify-center items-center flex  relative'>
 					<div className=' h-12 w-[80%] max-w-[500px] px-5 py-3 lg:h-[3.3rem] bg-accent  rounded-full flex justify-start items-center  relative '>
 						<a
