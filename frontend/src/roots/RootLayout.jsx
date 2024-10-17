@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import { cubesImg, cubesImgLight, homeBg } from "../../assets";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { cubesImg, cubesImgLight, homeBg } from "../assets";
 import { useSelector } from "react-redux";
 
 const RootLayout = () => {
