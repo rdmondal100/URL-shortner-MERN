@@ -1,9 +1,11 @@
 import { loginIcon } from '../assets'
 import {Button} from '../components/ui/button'
+
+
 const Header = () => {
   return (
     <header className=' flex w-[100vw] justify-between  py-8 h-28 relative px-5'>
-      <a className="logo " href='#'>
+      <a className="logo " href=''>
         <span className='gradient-logo font-extrabold text-2xl md:text-3xl md:pl-5'>URL Shortner</span>
       </a>
       <div className="auth flex gap-4 pr-3 md:pr-4 xl:pr-7">

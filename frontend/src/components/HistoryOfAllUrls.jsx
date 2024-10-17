@@ -4,10 +4,11 @@ import { copyIcon, downIcon } from "../assets";
 import { useDispatch, useSelector } from "react-redux";
 import timeAgo from "../utils/timesAgo";
 import { baseDomain } from "./constants/baseDomain";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
 const HistoryOfAllUrls = () => {
-	const [copiedId, setCopiedId] = useState(null);
-	const [expandedId, setExpandedId] = useState(null);
+	const [copiedId, setCopiedId] = useState(0);
+	const [expandedId, setExpandedId] = useState(0);
 	const { urlDetails, currentShortUrl } = useSelector(
 		(state) => state.urlData
 	);
@@ -21,7 +22,7 @@ const HistoryOfAllUrls = () => {
 			setCopiedId(id);
 
 			setTimeout(() => {
-				setCopiedId(null);
+				setCopiedId(0);
 			}, 2000);
 		} catch (error) {
 			console.log("Failed to copy", error);
@@ -80,16 +81,36 @@ const HistoryOfAllUrls = () => {
 									handleCopyBtn(shortUrl, item._id);
 								}}
 							>
-								<span
+								<div
 									className={`${
 										copiedId === item._id
 											? "scale-100"
 											: "scale-0"
-									} absolute text-[.7rem] -top-5 -right-2 bg-green-600 rounded-full px-2 transition-all duration-150 ease-linear`}
+									} absolute text-[.7rem] -top-5 -right-2 bg-green-600 rounded-full px-2 transition-all duration-200 ease-linear text-white`}
 								>
 									Copied
-								</span>
-								<img src={copyIcon} alt='' className=' w-4 ' />
+							
+								</div>
+								
+								<div className="icon-cpy relative transition-transform duration-500 ease-linear flex justify-center items-center">
+  {/* Copy Icon */}
+  <img
+    src={copyIcon}
+    alt=""
+    className={`w-4  inset-0 transition-transform duration-500 ease-linear transform ${
+      copiedId === item._id ? 'scale-0' : 'scale-100'
+    }`}
+  />
+  
+  {/* Done Icon */}
+  <IoCheckmarkDoneCircleSharp
+    className={`text-lg text-white absolute inset-0 transition-transform duration-500 ease-linear transform ${
+      copiedId === item._id ? 'scale-100' : 'scale-0'
+    }`}
+  />
+</div>
+
+								
 							</div>
 
 							<a
