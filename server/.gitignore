@@ -1,0 +1,13 @@
+.env
+/node_modules/
+
+.env.local
+.env.development
+.env.test
+.env.production
+
+/dist/
+/build/
+
+*.log
+
