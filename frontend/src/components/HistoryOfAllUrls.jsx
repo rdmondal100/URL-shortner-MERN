@@ -1,4 +1,4 @@
-import {  getAllUrlsHistory } from "../store/urlSlice";
+import { getAllUrlsHistory } from "../store/urlSlice";
 import { useEffect, useState } from "react";
 import { copyIcon, downIcon } from "../assets";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,15 +9,15 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 const HistoryOfAllUrls = () => {
 	const [copiedId, setCopiedId] = useState(0);
 	const [expandedId, setExpandedId] = useState(0);
-	const { urlDetails, currentShortUrl } = useSelector(
-		(state) => state.urlData
-	);
+	const { urlDetails, currentShortUrl } = useSelector((state) => state.urlData);
+
+
 	const dispatch = useDispatch();
 
 	const handleCopyBtn = async (url, id) => {
 		try {
-      console.log(url)
-      console.log(id)
+			console.log(url);
+			console.log(id);
 			await navigator.clipboard.writeText(url);
 			setCopiedId(id);
 
@@ -27,7 +27,7 @@ const HistoryOfAllUrls = () => {
 		} catch (error) {
 			console.log("Failed to copy", error);
 		}
-	}
+	};
 
 	console.log(urlDetails);
 
@@ -38,7 +38,7 @@ const HistoryOfAllUrls = () => {
 	return (
 		<div className='flex flex-col gap-3 w-full h-full'>
 			<div className='titles m-auto flex items-center justify-between rounded-t-xl bg-accent h-16 w-[85vw]  px-5'>
-				<span className=' w-[25%]'>Short URL</span>
+				<span className=' w-full md:w-[25%]'>Short URL</span>
 				<div className=' w-[65%] justify-between items-center hidden lg:flex'>
 					<span className=' w-[40%]'>Original URL</span>
 					<span className=' w-[15%]'>Clicks</span>
@@ -50,10 +50,10 @@ const HistoryOfAllUrls = () => {
 				{urlDetails.map((item) => (
 					<div
 						key={item?._id}
-						className='bg-muted/50 items-start lg:items-center flex flex-wrap py-3 lg:py-0 lg:h-14 w-full px-5   lg:w-[85vw] lg:justify-between transition-all duration-500 ease-in-out relative gap-1  '
+						className='bg-muted/50 items-start lg:items-center flex flex-wrap py-3 lg:py-0 lg:h-14 w-full px-5   lg:w-[85vw] lg:justify-between transition-all duration-500 ease-in-out relative gap-1 rounded-tr-xl lg:rounded-tl-xl  '
 					>
 						<div
-							className='p-2 rounded-full absolute right-1 cursor-pointer bg-accent lg:hidden'
+							className='p-2 rounded-full absolute right-0 cursor-pointer bg-accent lg:hidden top-0'
 							onClick={() =>
 								setExpandedId(
 									expandedId === item._id ? null : item._id
@@ -77,7 +77,7 @@ const HistoryOfAllUrls = () => {
 										: "bg-primary hover:bg-muted"
 								}`}
 								onClick={() => {
-                  const shortUrl = `${baseDomain}${item.shortId}`
+									const shortUrl = `${baseDomain}${item.shortId}`;
 									handleCopyBtn(shortUrl, item._id);
 								}}
 							>
@@ -89,36 +89,36 @@ const HistoryOfAllUrls = () => {
 									} absolute text-[.7rem] -top-5 -right-2 bg-green-600 rounded-full px-2 transition-all duration-200 ease-linear text-white`}
 								>
 									Copied
-							
 								</div>
-								
-								<div className="icon-cpy relative transition-transform duration-500 ease-linear flex justify-center items-center">
-  {/* Copy Icon */}
-  <img
-    src={copyIcon}
-    alt=""
-    className={`w-4  inset-0 transition-transform duration-500 ease-linear transform ${
-      copiedId === item._id ? 'scale-0' : 'scale-100'
-    }`}
-  />
-  
-  {/* Done Icon */}
-  <IoCheckmarkDoneCircleSharp
-    className={`text-lg text-white absolute inset-0 transition-transform duration-500 ease-linear transform ${
-      copiedId === item._id ? 'scale-100' : 'scale-0'
-    }`}
-  />
-</div>
 
-								
+								<div className='icon-cpy relative transition-transform duration-500 ease-linear flex justify-center items-center'>
+									{/* Copy Icon */}
+									<img
+										src={copyIcon}
+										alt=''
+										className={`w-4  inset-0 transition-transform duration-500 ease-linear transform ${
+											copiedId === item._id
+												? "scale-0"
+												: "scale-100"
+										}`}
+									/>
+
+									{/* Done Icon */}
+									<IoCheckmarkDoneCircleSharp
+										className={`text-lg text-white absolute inset-0 transition-transform duration-500 ease-linear transform ${
+											copiedId === item._id
+												? "scale-100"
+												: "scale-0"
+										}`}
+									/>
+								</div>
 							</div>
 
 							<a
 								href={`${baseDomain}${item.shortId}`}
 								target='_blank'
 								className='truncate-url'
-                rel="noopener noreferrer"
-
+								rel='noopener noreferrer'
 								title={`${baseDomain}${item?.shortId}`}
 							>
 								{`${baseDomain}${item?.shortId}`}
@@ -137,8 +137,7 @@ const HistoryOfAllUrls = () => {
 									href={item.redirectURL}
 									target='_blank'
 									className='truncate-url'
-                  rel="noopener noreferrer"
-
+									rel='noopener noreferrer'
 								>
 									{item.redirectURL}
 								</a>
