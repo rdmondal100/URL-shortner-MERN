@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { copyIcon } from "../assets";
-import { baseDomain } from "../store/urlSlice";
 import { useState } from "react";
+import { baseDomain } from "./constants/baseDomain";
 
 const ShowDetails = () => {
 	const { currentShortUrl } = useSelector((state) => state.urlData);

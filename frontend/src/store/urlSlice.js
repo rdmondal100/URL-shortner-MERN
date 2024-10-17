@@ -1,9 +1,9 @@
-import { asyncThunkCreator, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
+import { baseDomain } from "../components/constants/baseDomain";
 
 
 
-export const baseDomain = "http://localhost:8001/"
 
 const initialState = {
   urlDetails: [],

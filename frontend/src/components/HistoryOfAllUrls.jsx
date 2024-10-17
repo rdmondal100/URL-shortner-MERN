@@ -1,8 +1,9 @@
-import { baseDomain, getAllUrlsHistory } from "../store/urlSlice";
+import {  getAllUrlsHistory } from "../store/urlSlice";
 import { useEffect, useState } from "react";
 import { copyIcon, downIcon } from "../assets";
 import { useDispatch, useSelector } from "react-redux";
 import timeAgo from "../utils/timesAgo";
+import { baseDomain } from "./constants/baseDomain";
 
 const HistoryOfAllUrls = () => {
 	const [copiedId, setCopiedId] = useState(null);
