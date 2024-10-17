@@ -28,11 +28,11 @@ const InputUrlBox = () => {
   return (
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
-      className="urlBox w-[90vw] flex justify-center px-2"
+      className="urlBox w-full  flex justify-center items-center relative max-w-[700px]"
     >
-      <div className="flex w-[90vw] max-w-2xl justify-center items-center -space-x-12 relative">
+      <div className="flex w-full justify-center items-center relative ">
         {/* Left Icon */}
-        <div className="bg-transparent cursor-pointer hover:bg-transparent relative -left-1">
+        <div className="bg-transparent cursor-pointer hover:bg-transparent absolute left-4">
           <img src={linkIcon} alt="Link icon" className="w-5 md:w-6 lg:w-8 xl:w-10" />
         </div>
         {errors.url?.message && !isUrl && (
@@ -44,18 +44,18 @@ const InputUrlBox = () => {
           placeholder="Enter your looong URL here..."
           className={`rounded-full h-12 lg:h-[3.5rem] pl-14 ring focus:ring-2 
             ${errors.url ? 'ring-red-600' : 'focus:ring-blue-500'}
-            md:w-[60vw] lg:w-[70vw] transition-all duration-300 bg-accent pr-6`}
+             w-full transition-all duration-300 bg-accent pr-6`}
         />
       
 
         {/* Right Icon Button */}
         <Button
           type="submit"
-          className="rounded-full shadow-xl shadow-primary/35 lg:h-[3rem] relative right-0 md:right-7 lg:right-[6.2rem] h-11"
+          className="rounded-full shadow-xl shadow-primary/35 lg:h-[3rem] absolute right-1  h-11"
         >
           <div className="flex justify-center items-center gap-1 md:px-3">
             <span className="hidden text-white lg:block">Shorten Now</span>
-            <img src={rightArrowIcon} alt="Arrow icon" className="w-3 md:w-4 xl:w-5 lg:mt-1" />
+            <img src={rightArrowIcon} alt="Arrow icon" className="w-3 md:w-4 xl:w-5 " />
           </div>
         </Button>
       </div>

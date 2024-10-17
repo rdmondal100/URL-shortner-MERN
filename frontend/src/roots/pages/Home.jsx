@@ -8,10 +8,10 @@ const Home = () => {
 
     
 	return (
-		<section className='home min-h-[80vh] bg-no-repeat w-full  ' 
+		<section className='home min-h-[80vh] bg-no-repeat w-full flex flex-col justify-center  px-5 ' 
   
     >
-			<div className='theme'>
+			<div  className=' theme toggle hidden md:block absolute  top-[55%] -right-24'>
 				<ToggleTheme />
 			</div>
 
@@ -24,7 +24,7 @@ const Home = () => {
 				</p>
 			</div> */}
 
-			<div className='inputDetails px-6 '>
+			<div className='inputDetails w-full flex justify-center items-center flex-col '>
 				<div className='details mt-14 flex flex-col gap-6 '>
 					<h1 className='title gradient-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center font-extrabold'>
 						Shorten Your Loooong Links :)
@@ -35,12 +35,12 @@ const Home = () => {
 					</p>
 				</div>
 
-				<div className='inputBox-container mt-10 flex w-full justify-center '>
+				<div className=' inputBoxContainer   w-[90vw] flex justify-center items-center top-10 h-32 relative'>
           <InputUrlBox/>
         </div>
 			</div>
 
-      <div className="current-urlDetails">
+      <div className=" w-full flex justify-center items-center h-20 mt-8">
         <ShowDetails/>
       </div>
 

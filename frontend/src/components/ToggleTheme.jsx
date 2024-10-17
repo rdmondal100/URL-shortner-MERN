@@ -22,9 +22,7 @@ export function ToggleTheme() {
 
 	return (
 		<>
-			<div
-				className='toggle hidden md:block absolute  top-[50%] -right-24'
-			>
+
 				<div
 					className='  flex w-[16rem] h-12  justify-between rounded-full   items-center  bg-accent rotate-90 cursor-pointer transition-all duration-300 ease-linear  relative border border-border  '
 					onClick={handleThemeChange}
@@ -50,7 +48,6 @@ export function ToggleTheme() {
 						<span className={`${currentTheme==="dark"?"font-bold text-foreground":"text-muted-foreground"} `}>Dark</span>
 					</div>
 				</div>
-			</div>
 		</>
 	);
 }

@@ -23,18 +23,18 @@ const ShowDetails = () => {
 
 	return (
 		<>
-			{currentShortUrl._id && (
-				<div className='detailsContainer mt-10 w-full justify-center items-center flex '>
-					<div className='url text-center h-12 w-auto px-5 py-3 bg-accent  rounded-full flex justify-center items-center gap-5 relative pr-16'>
+			{!currentShortUrl._id && (
+				<div className=' w-[90vw] justify-center items-center flex  relative'>
+					<div className=' h-12 w-[80%] max-w-[500px] px-5 py-3 lg:h-[3.3rem] bg-accent  rounded-full flex justify-start items-center  relative '>
 						<a
 							href={`${baseDomain}${currentShortUrl?.shortId}`}
 							target='_blank'
-							className=' hover:text-primary'
+							className=' hover:text-primary text-start w-[85%] text-sm md:text-base truncate-url'
 						>
 							{`${baseDomain}${currentShortUrl?.shortId}`}
 						</a>
 						<span
-							className={` cursor-pointer  h-full w-16 rounded-r-full flex justify-center items-center absolute -right-5 group hover:bg-green-600 ${
+							className={` cursor-pointer  h-full w-[20%] max-w-16 rounded-r-full flex justify-center items-center absolute  right-0 group hover:bg-green-600 ${
 								copid ? "bg-green-600" : "bg-primary"
 							}`}
 							onClick={() =>
