@@ -33,7 +33,7 @@ const InputUrlBox = () => {
       <div className="flex w-full justify-center items-center relative ">
         {/* Left Icon */}
         <div className="bg-transparent cursor-pointer hover:bg-transparent absolute left-4">
-          <img src={linkIcon} alt="Link icon" className="w-5 md:w-6 lg:w-8 xl:w-10" />
+          <img src={linkIcon} alt="Link icon" className="w-5 md:w-6 lg:w-7" />
         </div>
         {errors.url?.message && !isUrl && (
                     <span className='text-red-600 absolute -top-8 text-center   w-full'>{errors.url?.message} !!</span>
