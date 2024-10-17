@@ -1,4 +1,10 @@
 {
+	"headers": [
+		{
+			"source": "/meta.json",
+			"headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+		}
+	],
 	"version": 2,
 	"rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
