@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config({path:'.env'})
+dotenv.config({ path: '.env' })
 
 import express from 'express'
 import urlRouter from "./routes/url.route.js"
@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173/",
+  origin: process.env.CORS_ORIGIN ,
   credentials: true
 }))
 
@@ -28,6 +28,6 @@ connectToMongooDB(process.env.MONGODB_URL)
     })
 
   }).catch((error) => {
-      console.log("Failed to connect with  database")
+    console.log("Failed to connect with  database")
   })
 

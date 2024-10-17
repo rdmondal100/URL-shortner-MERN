@@ -1,3 +1,3 @@
 
 
-export const baseDomain = "http://localhost:8001/"
+export const baseDomain = "https://shooort.vercel.app/"
