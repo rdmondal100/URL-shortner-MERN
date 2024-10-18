@@ -38,7 +38,7 @@ const Home = () => {
         <ShowDetails/>
       </div>
 
-      <div className="allHistoryUrls w-full mt-40">
+      <div className="allHistoryUrls w-full mt-20">
         <HistoryOfAllUrls/>
       </div>
 
