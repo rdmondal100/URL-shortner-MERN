@@ -29,7 +29,7 @@ console.log(isSubmitting)
 		<div className=" w-full flex justify-center">
 			{!isSubmitting && errorMessage && <ErrorPopUp/>}
 		{
-			!isSubmitting && !currentShortUrl?._id && <Loader/>
+			isSubmitting && !currentShortUrl?._id && <Loader/>
 		}
 			{currentShortUrl?._id && (
 				<div className=' w-[90vw] justify-center items-center flex  relative'>
