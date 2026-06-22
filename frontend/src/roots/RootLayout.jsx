@@ -1,31 +1,28 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { cubesImg, cubesImgLight, homeBg } from "../assets";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getAuthToken } from "../lib/auth";
+import { loadCurrentUser } from "../store/authSlice";
 
 const RootLayout = () => {
-	const { currentTheme } = useSelector((state) => state.urlData);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (getAuthToken()) {
+			dispatch(loadCurrentUser())
+		}
+	}, [dispatch]);
 	return (
-		<>
+		<div className='relative min-h-screen overflow-hidden'>
+			<div className='pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,hsl(var(--background)),hsl(var(--background)))]' />
 			<Header />
-			<div className='backgroundImg absolute inset-0 w-full h-full -z-50 overflow-hidden'>
-				<img
-					src={homeBg}
-					alt='Background'
-					className='absolute top-0 left-0 w-full h-full object-cover animate-slow-rotate -z-50 opacity-80'
-				/>
-				<img
-					src={currentTheme === "light" ? cubesImgLight : cubesImg}
-					alt='Cubes'
-					className='absolute top-0 left-0 w-full h-full object-fill opacity-40 -z-40'
-				/>
-			</div>
-			<main>
+			<main className='relative'>
 				<Outlet />
 			</main>
 			<Footer />
-		</>
+		</div>
 	);
 };
 

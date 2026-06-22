@@ -1,9 +1,8 @@
-import { moonIcon, sunIcon } from "../assets/index.js";
-
-import { changeTheme } from "../store/urlSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useTheme } from "@/components/ThemeProvider";
+import { MoonStar, SunMedium } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useTheme } from "@/components/ThemeProvider"
+import { changeTheme } from "../store/urlSlice"
 
 export function ToggleTheme() {
 	const dispatch = useDispatch();
@@ -21,33 +20,17 @@ export function ToggleTheme() {
 	}, [currentTheme, setTheme]);
 
 	return (
-		<>
-
-				<div
-					className='  flex w-[16rem] h-12  justify-between rounded-full   items-center  bg-accent rotate-90 cursor-pointer transition-all duration-300 ease-linear  relative border border-border  '
-					onClick={handleThemeChange}
-				>
-					<div
-						className={`light w-1/2 rounded-full h-full flex justify-center items-center  z-20 gap-4
-          `}
-					>
-						<img src={sunIcon} alt='' className={`${currentTheme==="light"?"w-5":"w-4 "} transition-all duration-300 ease-in-out`} />
-						<span className={`${currentTheme==="light" ? "font-bold text-foreground":"text-muted-foreground"} `}>Light</span>
-					</div>
-					<div
-						className={`activeBg absolute w-[49%] bg-blue-600 h-[80%]  rounded-full z-10 transition-all duration-500 ease-in-out ${
-							currentTheme === "light"
-								? "translate-x-1"
-								: "translate-x-full"
-						}`}
-					></div>
-					<div
-						className={`dark w-1/2 rounded-full h-full flex justify-center items-center  z-20 gap-3 `}
-					>
-						<img src={moonIcon} alt='' className={`${currentTheme==="dark"?"w-5":"w-4 "} transition-all duration-300 ease-in-out`} />
-						<span className={`${currentTheme==="dark"?"font-bold text-foreground":"text-muted-foreground"} `}>Dark</span>
-					</div>
-				</div>
-		</>
+		<button
+			type='button'
+			className='inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent'
+			onClick={handleThemeChange}
+		>
+			{currentTheme === "light" ? (
+				<SunMedium className='h-4 w-4 text-primary' />
+			) : (
+				<MoonStar className='h-4 w-4 text-primary' />
+			)}
+			<span>{currentTheme === "light" ? "Light" : "Dark"}</span>
+		</button>
 	);
 }

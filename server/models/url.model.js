@@ -12,7 +12,22 @@ const urlSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  visitHistory: [{ timestamp: { type: Number } }]
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: null,
+  },
+  visitHistory: [
+    {
+      timestamp: { type: Number },
+      platform: { type: String },
+      os: { type: String },
+      deviceType: { type: String },
+      browser: { type: String },
+      referrer: { type: String },
+      ipAddress: { type: String },
+    },
+  ],
 
 }, { timestamps: true })
 

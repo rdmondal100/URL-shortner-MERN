@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 220 25% 98%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -14,15 +14,15 @@
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: 214 30% 96%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
+    --muted: 214 28% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 214 32% 94%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 32% 91%;
+    --border: 220 28% 88%;
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
@@ -31,7 +31,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --boxShadow: rgba(90% 90% 90% 1)
+    --boxShadow: rgba(15, 23, 42, 0.08)
   }
 
   .dark {
@@ -59,7 +59,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --boxShadow: rgb(2, 8, 23)
+    --boxShadow: rgba(2, 8, 23, 0.85)
   }
 }
 
@@ -73,10 +73,14 @@
 
   body {
     @apply bg-background text-foreground overflow-x-hidden;
+    background:
+      radial-gradient(circle at top left, rgba(20, 78, 227, 0.06), transparent 28%),
+      radial-gradient(circle at top right, rgba(15, 118, 110, 0.06), transparent 24%),
+      hsl(var(--background));
   }
 
   .gradient-logo {
-    background: linear-gradient(to right, #EB568E 0%, #144EE3 100%);
+    background: linear-gradient(to right, #144ee3 0%, #0f766e 100%);
 
     background-clip: text;
     -webkit-background-clip: text;
@@ -84,7 +88,7 @@
   }
 
   .gradient-title {
-    background: linear-gradient(to right, #144EE3 10%, #EB568E 50%, #144EE3 80%);
+    background: linear-gradient(to right, #0f172a 0%, #1d4ed8 60%, #0f766e 100%);
 
     background-clip: text;
     -webkit-background-clip: text;
@@ -104,6 +108,10 @@
     white-space: nowrap;      
     overflow: hidden;        
     text-overflow: ellipsis; 
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
 

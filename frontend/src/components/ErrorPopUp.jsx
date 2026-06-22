@@ -1,11 +1,11 @@
 // ErrorPopUp.jsx
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrorMessage ,setErrorMessage } from '../store/urlSlice';
+import { clearErrorMessage } from '../store/urlSlice';
 import { BiSolidErrorAlt } from "react-icons/bi";
 
 const ErrorPopUp = () => {
   const dispatch = useDispatch();
-  const {errorMessage,isLoading} = useSelector((state) => state.urlData);
+  const { errorMessage } = useSelector((state) => state.urlData);
 
   const handleClose = () => {
     dispatch(clearErrorMessage());

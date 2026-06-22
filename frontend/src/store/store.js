@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import urlSlice from "./urlSlice";
+import authSlice from "./authSlice";
 
 
 const store = configureStore({
   reducer:{
-    "urlData":urlSlice
+    "urlData":urlSlice,
+    "authData": authSlice,
   }
 })
 

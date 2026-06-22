@@ -1,12 +1,12 @@
 import URL from "../models/url.model.js"
+import { parseVisitorInfo } from "../utils/visitorInfo.js"
 
 
 
 const handleShortIdandRedirect = async (req, res) => {
   try {
     const shortId = req.params.shortId
-    console.log(req.params)
-    console.log(shortId)
+    const visitorInfo = parseVisitorInfo(req)
     const entry = await URL.findOneAndUpdate(
       {
         shortId
@@ -15,7 +15,13 @@ const handleShortIdandRedirect = async (req, res) => {
       {
         $push: {
           visitHistory: {
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            platform: visitorInfo.platform,
+            os: visitorInfo.platform,
+            deviceType: visitorInfo.deviceType,
+            browser: visitorInfo.browser,
+            referrer: visitorInfo.referrer,
+            ipAddress: visitorInfo.ipAddress,
           }
         }
       },
@@ -23,16 +29,12 @@ const handleShortIdandRedirect = async (req, res) => {
         new: true
       }
     )
-    console.log(entry)
     if (!entry) {
-      console.log("NO URL found for : ", shortId)
       return res.status(404).json({ error: "Short url not found" })
     }
 
-    console.log(`Redirecting to : ${entry.redirectURL}`)
     res.redirect(entry.redirectURL)
   } catch (error) {
-    console.log(`Error during shortId redirection: ${error}`)
     res.status(500).json({error: "Internal server error"})
   }
 }

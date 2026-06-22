@@ -1,49 +1,31 @@
+import { Navigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
-import { ToggleTheme } from "../../components/ToggleTheme";
-import InputUrlBox from "../../components/InputUrlBox";
-import ShowDetails from "../../components/ShowDetails";
-import HistoryOfAllUrls from "../../components/HistoryOfAllUrls";
+import AuthPanel from "../../components/AuthPanel"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
 
 const Home = () => {
+  const { isAuthenticated, bootstrapStatus } = useSelector((state) => state.authData)
 
-    
-	return (
-		<section className='home min-h-[80vh] bg-no-repeat w-full flex flex-col justify-center  px-5 ' 
-  
-    >
-			<div  className=' theme toggle hidden lg:block absolute  top-[55%] -right-24'>
-				<ToggleTheme />
-			</div>
+  if (bootstrapStatus === "loading") {
+    return (
+      <section className="mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+        <Card className="w-full max-w-xl border-border/80 bg-card/95 text-center backdrop-blur">
+          <CardHeader>
+            <CardTitle>Restoring your session</CardTitle>
+            <CardDescription>Checking your account before loading the dashboard.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="mx-auto h-2 w-full overflow-hidden rounded-full bg-muted">
+              <div className="h-full w-1/2 animate-pulse rounded-full bg-primary" />
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+    )
+  }
 
+  return isAuthenticated ? <Navigate replace to="/dashboard" /> : <AuthPanel />
+}
 
-    
-
-			<div className='inputDetails w-full flex justify-center items-center flex-col '>
-				<div className='details mt-14 flex flex-col gap-6 '>
-					<h1 className='title gradient-title text-4xl  lg:text-5xl xl:text-6xl text-center font-extrabold'>
-						Shorten Your Loooong Links :)
-					</h1>
-					<p className=' text-center text-base text-muted-foreground xl:text-lg'>
-						URL Shortner is an efficient and easy-to-use URL shortening
-						service that streamlines your online experience.
-					</p>
-				</div>
-
-				<div className=' inputBoxContainer   w-[90vw] flex justify-center items-center top-10 h-32 relative'>
-          <InputUrlBox/>
-        </div>
-			</div>
-
-      <div className=" w-full flex justify-center items-center h-20 mt-8">
-        <ShowDetails/>
-      </div>
-
-      <div className="allHistoryUrls w-full mt-20">
-        <HistoryOfAllUrls/>
-      </div>
-
-		</section>
-	);
-};
-
-export default Home;
+export default Home

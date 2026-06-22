@@ -1,46 +1,68 @@
 import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 import { baseDomain } from "../components/constants/baseDomain";
+import { getAuthHeaders } from "../lib/auth";
 
 
 
 
 const initialState = {
   urlDetails: [],
-  currentShortUrl: '',
+  currentShortUrl: null,
   currentTheme: 'dark',
   isLoading: false,
   errorMessage: '',
   isSubmitting: false,
+  analyticsData: null,
+  analyticsStatus: 'idle',
+  analyticsError: '',
 
 
 }
 
-export const createShortUrl = createAsyncThunk("url/createShortUrl", async (url, { rejectWithValue }) => {
+export const createShortUrl = createAsyncThunk("url/createShortUrl", async (payload, { rejectWithValue }) => {
 
   try {
-    console.log(url)
-    const result = await axios.post(`${baseDomain}url`,{url});
+    const body = typeof payload === 'string' ? { url: payload } : payload
+    const result = await axios.post(`${baseDomain}url`, body, { headers: getAuthHeaders() });
 
-    console.log(result)
-    if (result.status !== 200) return rejectWithValue("Failed to create short URL. Please try again!");
+    if (result.status < 200 || result.status >= 300) return rejectWithValue("Failed to create short URL. Please try again!");
 
     
     return result.data
   } catch (error) {
-    console.log(error)
-    return rejectWithValue(error.message)
+    return rejectWithValue(error.response?.data?.error || error.message)
   }
 })
 
 
 export const getAllUrlsHistory = createAsyncThunk("url/getAllUrlsHistory", async (_, { rejectWithValue }) => {
   try {
-    const allUrlHistory = await axios.get(`${baseDomain}allUrls`)
-    if (allUrlHistory.status !== 200) return rejectWithValue("Failed to get all url history")
+    const allUrlHistory = await axios.get(`${baseDomain}allUrls`, { headers: getAuthHeaders() })
+    if (allUrlHistory.status < 200 || allUrlHistory.status >= 300) return rejectWithValue("Failed to get all url history")
     return allUrlHistory.data
   } catch (error) {
-    return rejectWithValue(error.message)
+    return rejectWithValue(error.response?.data?.error || error.message)
+  }
+})
+
+export const getUrlAnalytics = createAsyncThunk("url/getUrlAnalytics", async (shortId, { rejectWithValue }) => {
+  try {
+    const analytics = await axios.get(`${baseDomain}analytics/${shortId}`, { headers: getAuthHeaders() })
+    if (analytics.status < 200 || analytics.status >= 300) return rejectWithValue("Failed to get analytics")
+    return analytics.data
+  } catch (error) {
+    return rejectWithValue(error.response?.data?.error || error.message)
+  }
+})
+
+export const deleteShortUrl = createAsyncThunk("url/deleteShortUrl", async (shortId, { rejectWithValue }) => {
+  try {
+    const result = await axios.delete(`${baseDomain}url/${shortId}`, { headers: getAuthHeaders() })
+    if (result.status < 200 || result.status >= 300) return rejectWithValue("Failed to delete short URL")
+    return result.data.shortId
+  } catch (error) {
+    return rejectWithValue(error.response?.data?.error || error.message)
   }
 })
 
@@ -63,8 +85,10 @@ const urlSlice = createSlice({
       state.errorMessage =action.payload
     },
     setSubmitting: (state,action) => {
-      console.log(action.payload)
       state.isSubmitting = action.payload
+    },
+    clearAnalyticsError: (state) => {
+      state.analyticsError = ''
     },
   },
 
@@ -104,9 +128,42 @@ const urlSlice = createSlice({
           state.errorMessage=action.payload
       })
 
+      .addCase(getUrlAnalytics.pending, (state) => {
+        state.analyticsStatus = 'loading'
+        state.analyticsError = ''
+      })
+      .addCase(getUrlAnalytics.fulfilled, (state, action) => {
+        state.analyticsStatus = 'succeeded'
+        state.analyticsData = action.payload
+      })
+      .addCase(getUrlAnalytics.rejected, (state, action) => {
+        state.analyticsStatus = 'failed'
+        state.analyticsError = action.payload
+      })
+
+      .addCase(deleteShortUrl.pending, (state) => {
+        state.isSubmitting = true
+        state.errorMessage = ""
+      })
+      .addCase(deleteShortUrl.fulfilled, (state, action) => {
+        state.isSubmitting = false
+        state.urlDetails = state.urlDetails.filter((item) => item.shortId !== action.payload)
+        if (state.currentShortUrl?.shortId === action.payload) {
+          state.currentShortUrl = null
+        }
+        if (state.analyticsData?.shortId === action.payload) {
+          state.analyticsData = null
+          state.analyticsStatus = "idle"
+        }
+      })
+      .addCase(deleteShortUrl.rejected, (state, action) => {
+        state.isSubmitting = false
+        state.errorMessage = action.payload
+      })
+
   }
 })
 
-export const { changeTheme, setIsLoading, clearErrorMessage, setSubmitting, setErrorMessage } = urlSlice.actions
+export const { changeTheme, setIsLoading, clearErrorMessage, setSubmitting, setErrorMessage, clearAnalyticsError } = urlSlice.actions
 
 export default urlSlice.reducer

@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import urlSchemaValidation from "../schemaValidatino/urlSchemaValidation";
 import { BiSolidErrorAlt } from "react-icons/bi";
-import { useState } from "react";
 
 const InputUrlBox = () => {
 	const dispatch = useDispatch();
